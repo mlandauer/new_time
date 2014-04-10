@@ -17,17 +17,19 @@ sunrise_tomorrow = tomorrow.compute_official_sunrise(tz)
 time = DateTime.now
 
 if time < sunrise_today
-  fraction = (time - sunset_yesterday).to_f / (sunrise_today - sunset_yesterday)
-  seconds = (18 + fraction * 12) * 60 * 60
+  start, finish = sunset_yesterday, sunrise_today
+  start_hour = 18
 elsif time < sunset_today
-  fraction = (time - sunrise_today).to_f / (sunset_today - sunrise_today)
-  seconds = (6 + fraction * 12) * 60 * 60
+  start, finish = sunrise_today, sunset_today
+  start_hour = 6
 else
-  fraction = (time - sunset_today).to_f / (sunrise_tomorrow - sunset_today)
-  seconds = (18 + fraction * 12) * 60 * 60
+  start, finish = sunset_today, sunrise_tomorrow
+  start_hour = 18
 end
 
-fraction = seconds - seconds.floor
+seconds = (start_hour + (time - start).to_f / (finish - start) * 12) * 60 * 60
+
+fractional = seconds - seconds.floor
 seconds = seconds.floor
 minutes = seconds / 60
 seconds -= minutes * 60
