@@ -4,7 +4,12 @@ This is a new kind of time. One that is different on every point on earth and di
 
 The idea is simple.
 
-The sun rises at 6 AM and sets at 6 PM. It does this every day wherever on earth you are.
+The sun rises at 6 AM and sets at 6 PM. It does this every day wherever you are.
+
+Time runs at a constant speed during daylight hours. It does this at night as well but those speeds are usually not going to be the same.
+
+During summer, time is going to go slower during the day and faster at night.
+During winter, time is going to move quickly during the day and slowly at night.
 
 This is really an experiment to see what a different sense of time means. A second can be shorter or longer depending on the season but you are inextricably linked to the world via the sunrise and sunset.
 
