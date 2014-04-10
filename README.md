@@ -11,6 +11,8 @@ Time runs at a constant speed during daylight hours. It does this at night as we
 During summer, time is going to go slower during the day and faster at night.
 During winter, time is going to move quickly during the day and slowly at night.
 
+One other nitfy artifact is that midday (12 PM) will  be the time when the sun is at its highest.
+
 This is really an experiment to see what a different sense of time means. A second can be shorter or longer depending on the season but you are inextricably linked to the world via the sunrise and sunset.
 
 So right now all this little bit of code does is give me the new time.
