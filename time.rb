@@ -2,6 +2,12 @@
 require 'solareventcalculator'
 
 class NewTime
+  attr_accessor :hours, :minutes, :seconds, :fractional
+
+  def initialize(hours, minutes, seconds, fractional)
+    @hours, @minutes, @seconds, @fractional = hours, minutes, seconds, fractional
+  end
+
   def self.current_time(latitude, longitude, tz)
     yesterday = SolarEventCalculator.new(Date.today - 1, latitude, longitude)
     today = SolarEventCalculator.new(Date.today, latitude, longitude)
@@ -35,6 +41,10 @@ class NewTime
     minutes -= hours * 60
     hours -= 24 if hours >= 24
 
+    NewTime.new(hours, minutes, seconds, fractional)
+  end
+
+  def to_s
     if hours > 12
       "%i:%02i pm" % [hours - 12, minutes]
     else
