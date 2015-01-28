@@ -9,16 +9,16 @@ class NewTime
   end
 
   def self.current_time(latitude, longitude, tz)
-    yesterday = SolarEventCalculator.new(Date.today - 1, latitude, longitude)
-    today = SolarEventCalculator.new(Date.today, latitude, longitude)
-    tomorrow = SolarEventCalculator.new(Date.today + 1, latitude, longitude)
+    time = DateTime.now
+
+    yesterday = SolarEventCalculator.new(time.to_date - 1, latitude, longitude)
+    today = SolarEventCalculator.new(time.to_date, latitude, longitude)
+    tomorrow = SolarEventCalculator.new(time.to_date + 1, latitude, longitude)
 
     sunset_yesterday = yesterday.compute_official_sunset(tz)
     sunrise_today = today.compute_official_sunrise(tz)
     sunset_today = today.compute_official_sunset(tz)
     sunrise_tomorrow = tomorrow.compute_official_sunrise(tz)
-
-    time = DateTime.now
 
     if time < sunrise_today
       start, finish = sunset_yesterday, sunrise_today
