@@ -2,11 +2,7 @@
 require 'solareventcalculator'
 
 class NewTime
-  def self.current_time
-    latitude = -33.714955
-    longitude = 150.311407
-    tz = "Australia/Sydney"
-
+  def self.current_time(latitude, longitude, tz)
     yesterday = SolarEventCalculator.new(Date.today - 1, latitude, longitude)
     today = SolarEventCalculator.new(Date.today, latitude, longitude)
     tomorrow = SolarEventCalculator.new(Date.today + 1, latitude, longitude)
@@ -47,4 +43,8 @@ class NewTime
   end
 end
 
-puts NewTime.current_time
+latitude = -33.714955
+longitude = 150.311407
+tz = "Australia/Sydney"
+
+puts NewTime.current_time(latitude, longitude, tz)
