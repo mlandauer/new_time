@@ -32,15 +32,13 @@ module NewTime
       else
         # Is it before sunrise or after sunset?
         if date_time < sunrise_today
-          start_date = date_time.to_date - 1
+          new_date = date_time.to_date - 1
         else
-          start_date = date_time.to_date
+          new_date = date_time.to_date
         end
-        new_date = start_date
-        finish_date = start_date + 1
         new_start_hour = 18
-        start = sunset(start_date, latitude, longitude, tz)
-        finish = sunrise(finish_date, latitude, longitude, tz)
+        start = sunset(new_date, latitude, longitude, tz)
+        finish = sunrise(new_date + 1, latitude, longitude, tz)
       end
 
       new_seconds = (new_start_hour + (date_time - start).to_f / (finish - start) * 12) * 60 * 60
