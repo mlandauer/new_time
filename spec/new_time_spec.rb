@@ -14,37 +14,37 @@ describe NewTime do
     describe ".convert" do
       context "2015-01-31" do
         it "00:00:00" do
-          expect(NewTime::NewTime.convert(DateTime.parse("2015-01-31T00:00:00+00:00"), point).to_s).to eq "2015-01-30 11:47 pm"
+          expect(NewTime::NewTime.convert(DateTime.new(2015,1,31,0,0,0,"+0"), point).to_s).to eq "2015-01-30 11:47 pm"
         end
 
         it "06:00:00" do
-          expect(NewTime::NewTime.convert(DateTime.parse("2015-01-31T06:00:00+00:00"), point).to_s).to eq "2015-01-31 4:35 am"
+          expect(NewTime::NewTime.convert(DateTime.new(2015,1,31,6,0,0,"+0"), point).to_s).to eq "2015-01-31 4:35 am"
         end
 
         it "12:00:00" do
-          expect(NewTime::NewTime.convert(DateTime.parse("2015-01-31T12:00:00+00:00"), point).to_s).to eq "2015-01-31 11:37 am"
+          expect(NewTime::NewTime.convert(DateTime.new(2015,1,31,12,0,0,"+0"), point).to_s).to eq "2015-01-31 11:37 am"
         end
 
         it "18:00:00" do
-          expect(NewTime::NewTime.convert(DateTime.parse("2015-01-31T18:00:00+00:00"), point).to_s).to eq "2015-01-31 6:57 pm"
+          expect(NewTime::NewTime.convert(DateTime.new(2015,1,31,18,0,0,"+0"), point).to_s).to eq "2015-01-31 6:57 pm"
         end
       end
 
       context "2015-07-31" do
         it "00:00:00" do
-          expect(NewTime::NewTime.convert(DateTime.parse("2015-07-31T00:00:00+00:00"), point).to_s).to eq "2015-07-30 11:46 pm"
+          expect(NewTime::NewTime.convert(DateTime.new(2015,7,31,0,0,0,"+0"), point).to_s).to eq "2015-07-30 11:46 pm"
         end
 
         it "06:00:00" do
-          expect(NewTime::NewTime.convert(DateTime.parse("2015-07-31T06:00:00+00:00"), point).to_s).to eq "2015-07-31 7:14 am"
+          expect(NewTime::NewTime.convert(DateTime.new(2015,7,31,6,0,0,"+0"), point).to_s).to eq "2015-07-31 7:14 am"
         end
 
         it "12:00:00" do
-          expect(NewTime::NewTime.convert(DateTime.parse("2015-07-31T12:00:00+00:00"), point).to_s).to eq "2015-07-31 11:53 am"
+          expect(NewTime::NewTime.convert(DateTime.new(2015,7,31,12,0,0,"+0"), point).to_s).to eq "2015-07-31 11:53 am"
         end
 
         it "18:00:00" do
-          expect(NewTime::NewTime.convert(DateTime.parse("2015-07-31T18:00:00+00:00"), point).to_s).to eq "2015-07-31 4:31 pm"
+          expect(NewTime::NewTime.convert(DateTime.new(2015,7,31,18,0,0,"+0"), point).to_s).to eq "2015-07-31 4:31 pm"
         end
       end
     end
@@ -59,37 +59,37 @@ describe NewTime do
     describe ".convert" do
       context "2015-01-31" do
         it "00:00:00" do
-          expect(NewTime::NewTime.convert(DateTime.parse("2015-01-31T00:00:00+11:00"), point).to_s).to eq "2015-01-30 10:35 pm"
+          expect(NewTime::NewTime.convert(DateTime.new(2015,1,31,0,0,0,"+11"), point).to_s).to eq "2015-01-30 10:35 pm"
         end
 
         it "06:00:00" do
-          expect(NewTime::NewTime.convert(DateTime.parse("2015-01-31T06:00:00+11:00"), point).to_s).to eq "2015-01-31 5:37 am"
+          expect(NewTime::NewTime.convert(DateTime.new(2015,1,31,6,0,0,"+11"), point).to_s).to eq "2015-01-31 5:37 am"
         end
 
         it "12:00:00" do
-          expect(NewTime::NewTime.convert(DateTime.parse("2015-01-31T12:00:00+11:00"), point).to_s).to eq "2015-01-31 10:57 am"
+          expect(NewTime::NewTime.convert(DateTime.new(2015,1,31,12,0,0,"+11"), point).to_s).to eq "2015-01-31 10:57 am"
         end
 
         it "18:00:00" do
-          expect(NewTime::NewTime.convert(DateTime.parse("2015-01-31T18:00:00+11:00"), point).to_s).to eq "2015-01-31 4:11 pm"
+          expect(NewTime::NewTime.convert(DateTime.new(2015,1,31,18,0,0,"+11"), point).to_s).to eq "2015-01-31 4:11 pm"
         end
       end
 
       context "2015-07-31" do
         it "00:00:00" do
-          expect(NewTime::NewTime.convert(DateTime.parse("2015-07-31T00:00:00+11:00"), point).to_s).to eq "2015-07-30 11:03 pm"
+          expect(NewTime::NewTime.convert(DateTime.new(2015,7,31,0,0,0,"+11"), point).to_s).to eq "2015-07-30 11:03 pm"
         end
 
         it "06:00:00" do
-          expect(NewTime::NewTime.convert(DateTime.parse("2015-07-31T06:00:00+11:00"), point).to_s).to eq "2015-07-31 4:21 am"
+          expect(NewTime::NewTime.convert(DateTime.new(2015,7,31,6,0,0,"+11"), point).to_s).to eq "2015-07-31 4:21 am"
         end
 
         it "12:00:00" do
-          expect(NewTime::NewTime.convert(DateTime.parse("2015-07-31T12:00:00+11:00"), point).to_s).to eq "2015-07-31 10:45 am"
+          expect(NewTime::NewTime.convert(DateTime.new(2015,7,31,12,0,0,"+11"), point).to_s).to eq "2015-07-31 10:45 am"
         end
 
         it "18:00:00" do
-          expect(NewTime::NewTime.convert(DateTime.parse("2015-07-31T18:00:00+11:00"), point).to_s).to eq "2015-07-31 5:39 pm"
+          expect(NewTime::NewTime.convert(DateTime.new(2015,7,31,18,0,0,"+11"), point).to_s).to eq "2015-07-31 5:39 pm"
         end
       end
     end
