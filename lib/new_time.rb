@@ -37,10 +37,10 @@ module NewTime
         start_hour = 18
       end
 
-      seconds = (start_hour + (date_time - start).to_f / (finish - start) * 12) * 60 * 60
+      new_seconds = (start_hour + (date_time - start).to_f / (finish - start) * 12) * 60 * 60
 
-      fractional = seconds - seconds.floor
-      seconds = seconds.floor
+      seconds = new_seconds.floor
+      fractional = new_seconds - seconds
       minutes = seconds / 60
       seconds -= minutes * 60
       hours = minutes / 60
