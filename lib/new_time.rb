@@ -20,27 +20,11 @@ module NewTime
       SolarEventCalculator.new(date, latitude, longitude).compute_official_sunset(tz)
     end
 
-    def self.sunset_yesterday(date_time, latitude, longitude, tz)
-      sunset(date_time.to_date - 1, latitude, longitude, tz)
-    end
-
-    def self.sunrise_today(date_time, latitude, longitude, tz)
-      sunrise(date_time.to_date, latitude, longitude, tz)
-    end
-
-    def self.sunset_today(date_time, latitude, longitude, tz)
-      sunset(date_time.to_date, latitude, longitude, tz)
-    end
-
-    def self.sunrise_tomorrow(date_time, latitude, longitude, tz)
-      sunrise(date_time.to_date + 1, latitude, longitude, tz)
-    end
-
     def self.convert(date_time, latitude, longitude, tz)
-      sunset_yesterday = sunset_yesterday(date_time, latitude, longitude, tz)
-      sunrise_today = sunrise_today(date_time, latitude, longitude, tz)
-      sunset_today = sunset_today(date_time, latitude, longitude, tz)
-      sunrise_tomorrow = sunrise_tomorrow(date_time, latitude, longitude, tz)
+      sunset_yesterday = sunset(date_time.to_date - 1, latitude, longitude, tz)
+      sunrise_today = sunrise(date_time.to_date, latitude, longitude, tz)
+      sunset_today = sunset(date_time.to_date, latitude, longitude, tz)
+      sunrise_tomorrow = sunrise(date_time.to_date + 1, latitude, longitude, tz)
 
       if date_time < sunrise_today
         start, finish = sunset_yesterday, sunrise_today
