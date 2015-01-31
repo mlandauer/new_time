@@ -12,6 +12,7 @@ module NewTime
   class NewTime
     attr_accessor :year, :month, :day, :hours, :minutes, :seconds, :fractional
 
+    # TODO Make seconds a float and get rid of fractional
     def initialize(year, month, day, hours, minutes, seconds, fractional)
       @year, @month, @day, @hours, @minutes, @seconds, @fractional = year, month, day, hours, minutes, seconds, fractional
     end
