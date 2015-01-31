@@ -2,8 +2,6 @@
 
 require "new_time"
 
-latitude = -33.714955
-longitude = 150.311407
-tz = "Australia/Sydney"
+point = NewTime::Point.new(-33.714955, 150.311407, "Australia/Sydney")
 
-puts NewTime::NewTime.current_time(latitude, longitude, tz)
+puts NewTime::NewTime.current_time(point)

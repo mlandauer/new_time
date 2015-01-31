@@ -1,6 +1,14 @@
 require 'solareventcalculator'
 
 module NewTime
+  class Point
+    attr_accessor :latitude, :longitude, :tz
+
+    def initialize(latitude, longitude, tz)
+      @latitude, @longitude, @tz = latitude, longitude, tz
+    end
+  end
+
   class NewTime
     attr_accessor :year, :month, :day, :hours, :minutes, :seconds, :fractional
 
@@ -8,8 +16,8 @@ module NewTime
       @year, @month, @day, @hours, @minutes, @seconds, @fractional = year, month, day, hours, minutes, seconds, fractional
     end
 
-    def self.current_time(latitude, longitude, tz)
-      convert(DateTime.now, latitude, longitude, tz)
+    def self.current_time(point)
+      convert(DateTime.now, point.latitude, point.longitude, point.tz)
     end
 
     def self.sunrise(date, latitude, longitude, tz)
