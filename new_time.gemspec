@@ -1,6 +1,7 @@
 Gem::Specification.new do |s|
   s.name        = 'new_time'
   s.version     = '0.0.1'
+  s.executables << 'new_time'
   s.date        = '2015-01-31'
   s.summary     = "A new kind of time that anchors you to the movement of the sun"
   s.description = "A new kind of time"
