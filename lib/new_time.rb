@@ -27,7 +27,7 @@ module NewTime
       # During daylight hours?
       if date_time >= sunrise_today && date_time < sunset_today
         start, finish = sunrise_today, sunset_today
-        start_hour = 6
+        new_start_hour = 6
         new_date = date_time.to_date
       else
         # Is it before sunrise or after sunset?
@@ -38,25 +38,25 @@ module NewTime
         end
         new_date = start_date
         finish_date = start_date + 1
-        start_hour = 18
+        new_start_hour = 18
         start = sunset(start_date, latitude, longitude, tz)
         finish = sunrise(finish_date, latitude, longitude, tz)
       end
 
-      new_seconds = (start_hour + (date_time - start).to_f / (finish - start) * 12) * 60 * 60
+      new_seconds = (new_start_hour + (date_time - start).to_f / (finish - start) * 12) * 60 * 60
 
-      seconds = new_seconds.floor
-      fractional = new_seconds - seconds
-      minutes = seconds / 60
-      seconds -= minutes * 60
-      hours = minutes / 60
-      minutes -= hours * 60
-      if hours >= 24
-        hours -= 24
+      new_fractional = new_seconds - new_seconds.floor
+      new_seconds = new_seconds.floor
+      new_minutes = new_seconds / 60
+      new_seconds -= new_minutes * 60
+      new_hours = new_minutes / 60
+      new_minutes -= new_hours * 60
+      if new_hours >= 24
+        new_hours -= 24
         new_date += 1
       end
 
-      NewTime.new(new_date.year, new_date.month, new_date.day, hours, minutes, seconds, fractional)
+      NewTime.new(new_date.year, new_date.month, new_date.day, new_hours, new_minutes, new_seconds, new_fractional)
     end
 
     def time_to_s
