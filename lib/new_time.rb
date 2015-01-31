@@ -26,15 +26,19 @@ module NewTime
       sunset_today = sunset(date_time.to_date, latitude, longitude, tz)
       sunrise_tomorrow = sunrise(date_time.to_date + 1, latitude, longitude, tz)
 
-      if date_time < sunrise_today
-        start, finish = sunset_yesterday, sunrise_today
-        start_hour = 18
-      elsif date_time < sunset_today
+      # During daylight hours?
+      if date_time >= sunrise_today && date_time < sunset_today
         start, finish = sunrise_today, sunset_today
         start_hour = 6
       else
-        start, finish = sunset_today, sunrise_tomorrow
-        start_hour = 18
+        # Is it before sunrise or after sunset?
+        if date_time < sunrise_today
+          start, finish = sunset_yesterday, sunrise_today
+          start_hour = 18
+        else
+          start, finish = sunset_today, sunrise_tomorrow
+          start_hour = 18
+        end
       end
 
       new_seconds = (start_hour + (date_time - start).to_f / (finish - start) * 12) * 60 * 60
