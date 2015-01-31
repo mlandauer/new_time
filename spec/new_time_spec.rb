@@ -9,13 +9,13 @@ describe NewTime do
     let(:point) { NewTime::Point.new(51.829731, -0.860455, "Europe/London") }
 
     def c(month, hour)
-      NewTime::NewTime.convert(DateTime.new(2015,month,1,hour,0,0,"+0"), point).to_s
+      NewTime::NewTime.convert(Time.new(2015,month,1,hour,0,0,"+00:00"), point).to_s
     end
 
     def i(month, hour)
-      t1 = DateTime.new(2015,month,1,hour,0,0,"+0")
+      t1 = Time.new(2015,month,1,hour,0,0,"+00:00")
       t2 = NewTime::NewTime.convert(t1, point).convert(point)
-      expect(t2).to eq t1
+      expect(t2).to eq t1.to_datetime
     end
 
     describe ".convert" do
@@ -50,13 +50,13 @@ describe NewTime do
     let(:point) { NewTime::Point.new(-33.714955, 150.311407, "Australia/Sydney") }
 
     def c(month, hour)
-      NewTime::NewTime.convert(DateTime.new(2015,month,1,hour,0,0,"+11"), point).to_s
+      NewTime::NewTime.convert(Time.new(2015,month,1,hour,0,0,"+11:00"), point).to_s
     end
 
     def i(month, hour)
-      t1 = DateTime.new(2015,month,1,hour,0,0,"+11")
+      t1 = Time.new(2015,month,1,hour,0,0,"+11:00")
       t2 = NewTime::NewTime.convert(t1, point).convert(point)
-      expect(t2).to eq t1
+      expect(t2).to eq t1.to_datetime
     end
 
     describe ".convert" do
@@ -90,7 +90,7 @@ describe NewTime do
       it do
         n1 = NewTime::NewTime.new(2015,2,1,6,50,33,0)
         t1 = n1.convert(point)
-        n2 = NewTime::NewTime.convert(t1, point)
+        n2 = NewTime::NewTime.convert(t1.to_time, point)
         expect(n2.year).to eq n1.year
         expect(n2.month).to eq n1.month
         expect(n2.day).to eq n1.day

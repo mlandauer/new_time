@@ -18,7 +18,7 @@ module NewTime
     end
 
     def self.current_time(point)
-      convert(DateTime.now, point)
+      convert(Time.now, point)
     end
 
     def self.sunrise(date, point)
@@ -54,7 +54,8 @@ module NewTime
       start + (new_seconds.to_f / (60 * 60) - new_start_hour) * (finish - start) / 12
     end
 
-    def self.convert(date_time, point)
+    def self.convert(time, point)
+      date_time = time.to_datetime
       sunrise_today = sunrise(date_time.to_date, point)
       sunset_today = sunset(date_time.to_date, point)
 
