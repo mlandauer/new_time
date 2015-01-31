@@ -62,7 +62,7 @@ module NewTime
       NewTime.new(new_date.year, new_date.month, new_date.day, rollover, hours, minutes, seconds, fractional)
     end
 
-    def to_s
+    def time_to_s
       if hours > 12
         "%i:%02i pm" % [hours - 12, minutes]
       else
@@ -70,8 +70,12 @@ module NewTime
       end
     end
 
-    def full
-      Date.new(year, month, day).to_s + " " + to_s
+    def date_to_s
+      Date.new(year, month, day).to_s
+    end
+
+    def to_s
+      date_to_s + " " + time_to_s
     end
   end
 end
