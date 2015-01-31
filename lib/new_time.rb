@@ -2,10 +2,10 @@ require 'solareventcalculator'
 
 module NewTime
   class NewTime
-    attr_accessor :hours, :minutes, :seconds, :fractional
+    attr_accessor :year, :month, :day, :hours, :minutes, :seconds, :fractional
 
-    def initialize(hours, minutes, seconds, fractional)
-      @hours, @minutes, @seconds, @fractional = hours, minutes, seconds, fractional
+    def initialize(year, month, day, hours, minutes, seconds, fractional)
+      @year, @month, @day, @hours, @minutes, @seconds, @fractional = year, month, day, hours, minutes, seconds, fractional
     end
 
     def self.current_time(latitude, longitude, tz)
@@ -47,7 +47,7 @@ module NewTime
       minutes -= hours * 60
       hours -= 24 if hours >= 24
 
-      NewTime.new(hours, minutes, seconds, fractional)
+      NewTime.new(date_time.year, date_time.month, date_time.day, hours, minutes, seconds, fractional)
     end
 
     def to_s
