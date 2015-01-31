@@ -11,26 +11,49 @@ describe NewTime do
     let(:tz)        { "Australia/Sydney" }
 
     describe ".convert" do
-      it "00:00:01" do
-        expect(NewTime::NewTime.convert(DateTime.parse("2015-01-31T00:00:01+11:00"), latitude, longitude, tz).to_s).to eq "10:35 pm"
+      context "2015-01-31" do
+        it "00:00:01" do
+          expect(NewTime::NewTime.convert(DateTime.parse("2015-01-31T00:00:01+11:00"), latitude, longitude, tz).to_s).to eq "10:35 pm"
+        end
+
+        it "03:00:00" do
+          expect(NewTime::NewTime.convert(DateTime.parse("2015-01-31T03:00:00+11:00"), latitude, longitude, tz).to_s).to eq "2:06 am"
+        end
+
+        it "14:32:10" do
+          expect(NewTime::NewTime.convert(DateTime.parse("2015-01-31T14:32:10+11:00"), latitude, longitude, tz).to_s).to eq "1:10 pm"
+        end
+
+        it "20:10:00" do
+          expect(NewTime::NewTime.convert(DateTime.parse("2015-01-31T20:10:00+11:00"), latitude, longitude, tz).to_s).to eq "6:07 pm"
+        end
+
+        it "23:59:59" do
+          expect(NewTime::NewTime.convert(DateTime.parse("2015-01-31T23:59:59+11:00"), latitude, longitude, tz).to_s).to eq "10:35 pm"
+        end
       end
 
-      it "03:00:00" do
-        expect(NewTime::NewTime.convert(DateTime.parse("2015-01-31T03:00:00+11:00"), latitude, longitude, tz).to_s).to eq "2:06 am"
-      end
+      context "2015-07-31" do
+        it "00:00:01" do
+          expect(NewTime::NewTime.convert(DateTime.parse("2015-07-31T00:00:01+11:00"), latitude, longitude, tz).to_s).to eq "11:03 pm"
+        end
 
-      it "14:32:10" do
-        expect(NewTime::NewTime.convert(DateTime.parse("2015-01-31T14:32:10+11:00"), latitude, longitude, tz).to_s).to eq "1:10 pm"
-      end
+        it "03:00:00" do
+          expect(NewTime::NewTime.convert(DateTime.parse("2015-07-31T03:00:00+11:00"), latitude, longitude, tz).to_s).to eq "1:42 am"
+        end
 
-      it "20:10:00" do
-        expect(NewTime::NewTime.convert(DateTime.parse("2015-01-31T20:10:00+11:00"), latitude, longitude, tz).to_s).to eq "6:07 pm"
-      end
+        it "14:32:10" do
+          expect(NewTime::NewTime.convert(DateTime.parse("2015-07-31T14:32:10+11:00"), latitude, longitude, tz).to_s).to eq "1:40 pm"
+        end
 
-      it "23:59:59" do
-        expect(NewTime::NewTime.convert(DateTime.parse("2015-01-31T23:59:59+11:00"), latitude, longitude, tz).to_s).to eq "10:35 pm"
-      end
+        it "20:10:00" do
+          expect(NewTime::NewTime.convert(DateTime.parse("2015-07-31T20:10:00+11:00"), latitude, longitude, tz).to_s).to eq "7:39 pm"
+        end
 
+        it "23:59:59" do
+          expect(NewTime::NewTime.convert(DateTime.parse("2015-07-31T23:59:59+11:00"), latitude, longitude, tz).to_s).to eq "11:02 pm"
+        end
+      end
     end
   end
 end
