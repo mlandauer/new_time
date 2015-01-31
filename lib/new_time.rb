@@ -21,10 +21,8 @@ module NewTime
     end
 
     def self.convert(date_time, latitude, longitude, tz)
-      sunset_yesterday = sunset(date_time.to_date - 1, latitude, longitude, tz)
       sunrise_today = sunrise(date_time.to_date, latitude, longitude, tz)
       sunset_today = sunset(date_time.to_date, latitude, longitude, tz)
-      sunrise_tomorrow = sunrise(date_time.to_date + 1, latitude, longitude, tz)
 
       # During daylight hours?
       if date_time >= sunrise_today && date_time < sunset_today
@@ -33,12 +31,14 @@ module NewTime
       else
         # Is it before sunrise or after sunset?
         if date_time < sunrise_today
-          start, finish = sunset_yesterday, sunrise_today
-          start_hour = 18
+          start_date = date_time.to_date - 1
         else
-          start, finish = sunset_today, sunrise_tomorrow
-          start_hour = 18
+          start_date = date_time.to_date
         end
+        finish_date = start_date + 1
+        start_hour = 18
+        start = sunset(start_date, latitude, longitude, tz)
+        finish = sunrise(finish_date, latitude, longitude, tz)
       end
 
       new_seconds = (start_hour + (date_time - start).to_f / (finish - start) * 12) * 60 * 60
