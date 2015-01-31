@@ -89,8 +89,8 @@ describe NewTime do
     describe "inverting should work with zero fractional" do
       it do
         n1 = NewTime::NewTime.new(2015,2,1,6,50,33,0)
-        t1 = n1.convert(point).to_datetime
-        n2 = NewTime::NewTime.convert(t1.to_time, point)
+        t1 = n1.convert(point)
+        n2 = NewTime::NewTime.convert(t1, point)
         expect(n2.year).to eq n1.year
         expect(n2.month).to eq n1.month
         expect(n2.day).to eq n1.day

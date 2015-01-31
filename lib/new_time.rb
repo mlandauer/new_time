@@ -63,7 +63,6 @@ module NewTime
     end
 
     def self.convert(time, point)
-      date_time = time.to_datetime
       sunrise_today = sunrise2(time.to_date, point)
       sunset_today = sunset2(time.to_date, point)
 
