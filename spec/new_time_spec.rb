@@ -15,7 +15,7 @@ describe NewTime do
     def i(month, hour)
       t1 = Time.new(2015,month,1,hour,0,0,"+00:00")
       t2 = NewTime::NewTime.convert(t1, point).convert(point)
-      expect(t2).to eq t1
+      expect(t2.to_f).to eq t1.to_f
     end
 
     describe ".convert" do
@@ -56,7 +56,7 @@ describe NewTime do
     def i(month, hour)
       t1 = Time.new(2015,month,1,hour,0,0,"+11:00")
       t2 = NewTime::NewTime.convert(t1, point).convert(point)
-      expect(t2).to eq t1
+      expect(t2.to_f).to eq t1.to_f
     end
 
     describe ".convert" do

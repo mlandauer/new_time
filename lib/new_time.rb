@@ -44,22 +44,22 @@ module NewTime
 
       # During daylight hours?
       if hours >= 6 && hours < 18
-        start = NewTime.sunrise(today, point)
-        finish = NewTime.sunset(today, point)
+        start = NewTime.sunrise2(today, point)
+        finish = NewTime.sunset2(today, point)
         new_start_hour = 6
       else
         # Is it before sunrise or after sunset?
         if hours < 6
-          start = NewTime.sunset(today - 1, point)
-          finish = NewTime.sunrise(today, point)
+          start = NewTime.sunset2(today - 1, point)
+          finish = NewTime.sunrise2(today, point)
           new_start_hour = 18 - 24
         else
-          start = NewTime.sunset(today, point)
-          finish = NewTime.sunrise(today + 1, point)
+          start = NewTime.sunset2(today, point)
+          finish = NewTime.sunrise2(today + 1, point)
           new_start_hour = 18
         end
       end
-      (start + (new_seconds.to_f / (60 * 60) - new_start_hour) * (finish - start) / 12).to_time
+      start + (new_seconds.to_f / (60 * 60) - new_start_hour) * (finish - start) / 12
     end
 
     def self.convert(time, point)
