@@ -29,6 +29,14 @@ module NewTime
       SolarEventCalculator.new(date, point.latitude, point.longitude).compute_official_sunset(point.tz)
     end
 
+    def self.sunrise2(date, point)
+      sunrise(date, point).to_time
+    end
+
+    def self.sunset2(date, point)
+      sunset(date, point).to_time
+    end
+
     # Convert back to "normal" time
     def convert(point)
       today = Date.new(year, month, day)
@@ -56,27 +64,27 @@ module NewTime
 
     def self.convert(time, point)
       date_time = time.to_datetime
-      sunrise_today = sunrise(date_time.to_date, point)
-      sunset_today = sunset(date_time.to_date, point)
+      sunrise_today = sunrise2(time.to_date, point)
+      sunset_today = sunset2(time.to_date, point)
 
       # During daylight hours?
-      if date_time >= sunrise_today && date_time < sunset_today
+      if time >= sunrise_today && time < sunset_today
         start, finish = sunrise_today, sunset_today
         new_start_hour = 6
-        new_date = date_time.to_date
+        new_date = time.to_date
       else
         # Is it before sunrise or after sunset?
-        if date_time < sunrise_today
-          new_date = date_time.to_date - 1
+        if time < sunrise_today
+          new_date = time.to_date - 1
         else
-          new_date = date_time.to_date
+          new_date = time.to_date
         end
         new_start_hour = 18
-        start = sunset(new_date, point)
-        finish = sunrise(new_date + 1, point)
+        start = sunset(new_date, point).to_time
+        finish = sunrise(new_date + 1, point).to_time
       end
 
-      new_seconds = (new_start_hour + (date_time - start).to_f / (finish - start) * 12) * 60 * 60
+      new_seconds = (new_start_hour + (time - start).to_f / (finish - start) * 12) * 60 * 60
 
       new_fractional = new_seconds - new_seconds.floor
       new_seconds = new_seconds.floor
