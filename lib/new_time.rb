@@ -28,6 +28,7 @@ module NewTime
       if date_time >= sunrise_today && date_time < sunset_today
         start, finish = sunrise_today, sunset_today
         start_hour = 6
+        new_date = date_time.to_date
       else
         # Is it before sunrise or after sunset?
         if date_time < sunrise_today
@@ -35,6 +36,7 @@ module NewTime
         else
           start_date = date_time.to_date
         end
+        new_date = start_date
         finish_date = start_date + 1
         start_hour = 18
         start = sunset(start_date, latitude, longitude, tz)
@@ -51,12 +53,13 @@ module NewTime
       minutes -= hours * 60
       if hours >= 24
         hours -= 24
+        new_date += 1
         rollover = true
       else
         rollover = false
       end
 
-      NewTime.new(date_time.year, date_time.month, date_time.day, rollover, hours, minutes, seconds, fractional)
+      NewTime.new(new_date.year, new_date.month, new_date.day, rollover, hours, minutes, seconds, fractional)
     end
 
     def to_s
@@ -65,6 +68,10 @@ module NewTime
       else
         "%i:%02i am" % [hours, minutes]
       end
+    end
+
+    def full
+      Date.new(year, month, day).to_s + " " + to_s
     end
   end
 end
