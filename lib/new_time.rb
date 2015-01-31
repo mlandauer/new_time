@@ -28,6 +28,30 @@ module NewTime
       SolarEventCalculator.new(date, point.latitude, point.longitude).compute_official_sunset(point.tz)
     end
 
+    # Convert back to "normal" time
+    def convert(point)
+      today = Date.new(year, month, day)
+      new_seconds = seconds + fractional + (minutes + hours * 60) * 60
+
+      # During daylight hours?
+      if hours >= 6 && hours < 18
+        start = NewTime.sunrise(today, point)
+        finish = NewTime.sunset(today, point)
+        start + (new_seconds / (60 * 60) - 6) * (finish - start) / 12
+      else
+        # Is it before sunrise or after sunset?
+        if hours < 6
+          start = NewTime.sunset(today - 1, point)
+          finish = NewTime.sunrise(today, point)
+          start + (new_seconds / (60 * 60) + 24 - 18) * (finish - start) / 12
+        else
+          start = NewTime.sunset(today, point)
+          finish = NewTime.sunrise(today + 1, point)
+          start + (new_seconds / (60 * 60) - 18) * (finish - start) / 12
+        end
+      end
+    end
+
     def self.convert(date_time, point)
       sunrise_today = sunrise(date_time.to_date, point)
       sunset_today = sunset(date_time.to_date, point)

@@ -12,6 +12,12 @@ describe NewTime do
       NewTime::NewTime.convert(DateTime.new(2015,month,1,hour,0,0,"+0"), point).to_s
     end
 
+    def i(month, hour)
+      t1 = DateTime.new(2015,month,1,hour,0,0,"+0")
+      t2 = NewTime::NewTime.convert(t1, point).convert(point)
+      expect(t2).to eq t1
+    end
+
     describe ".convert" do
       context "2015-01-01" do
         it { expect(c(1, 0)).to eq "2014-12-31 11:55 pm" }
@@ -27,6 +33,17 @@ describe NewTime do
         it { expect(c(7, 18)).to eq "2015-07-01 4:15 pm" }
       end
     end
+
+    describe "it should be invertable" do
+      it { i(1, 0) }
+      it { i(1, 6) }
+      it { i(1, 12) }
+      it { i(1, 18) }
+      it { i(7, 0) }
+      it { i(7, 6) }
+      it { i(7, 12) }
+      it { i(7, 18) }
+    end
   end
 
   context "For a fixed place in the southern hemisphere" do
@@ -34,6 +51,12 @@ describe NewTime do
 
     def c(month, hour)
       NewTime::NewTime.convert(DateTime.new(2015,month,1,hour,0,0,"+11"), point).to_s
+    end
+
+    def i(month, hour)
+      t1 = DateTime.new(2015,month,1,hour,0,0,"+11")
+      t2 = NewTime::NewTime.convert(t1, point).convert(point)
+      expect(t2).to eq t1
     end
 
     describe ".convert" do
@@ -50,6 +73,17 @@ describe NewTime do
         it { expect(c(7, 12)).to eq "2015-07-01 10:45 am" }
         it { expect(c(7, 18)).to eq "2015-07-01 6:00 pm" }
       end
+    end
+
+    describe "it should be invertable" do
+      it { i(1, 0) }
+      it { i(1, 6) }
+      it { i(1, 12) }
+      it { i(1, 18) }
+      it { i(7, 0) }
+      it { i(7, 6) }
+      it { i(7, 12) }
+      it { i(7, 18) }
     end
   end
 end
