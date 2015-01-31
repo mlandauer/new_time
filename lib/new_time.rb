@@ -20,21 +20,17 @@ module NewTime
       convert(DateTime.now, point)
     end
 
-    def self.sunrise(date, latitude, longitude, tz)
-      SolarEventCalculator.new(date, latitude, longitude).compute_official_sunrise(tz)
+    def self.sunrise(date, point)
+      SolarEventCalculator.new(date, point.latitude, point.longitude).compute_official_sunrise(point.tz)
     end
 
-    def self.sunset(date, latitude, longitude, tz)
-      SolarEventCalculator.new(date, latitude, longitude).compute_official_sunset(tz)
+    def self.sunset(date, point)
+      SolarEventCalculator.new(date, point.latitude, point.longitude).compute_official_sunset(point.tz)
     end
 
     def self.convert(date_time, point)
-      latitude = point.latitude
-      longitude = point.longitude
-      tz = point.tz
-
-      sunrise_today = sunrise(date_time.to_date, latitude, longitude, tz)
-      sunset_today = sunset(date_time.to_date, latitude, longitude, tz)
+      sunrise_today = sunrise(date_time.to_date, point)
+      sunset_today = sunset(date_time.to_date, point)
 
       # During daylight hours?
       if date_time >= sunrise_today && date_time < sunset_today
@@ -49,8 +45,8 @@ module NewTime
           new_date = date_time.to_date
         end
         new_start_hour = 18
-        start = sunset(new_date, latitude, longitude, tz)
-        finish = sunrise(new_date + 1, latitude, longitude, tz)
+        start = sunset(new_date, point)
+        finish = sunrise(new_date + 1, point)
       end
 
       new_seconds = (new_start_hour + (date_time - start).to_f / (finish - start) * 12) * 60 * 60
