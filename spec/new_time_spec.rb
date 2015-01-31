@@ -9,22 +9,22 @@ describe NewTime do
     let(:point) { NewTime::Point.new(51.829731, -0.860455, "Europe/London") }
 
     def c(month, hour)
-      NewTime::NewTime.convert(DateTime.new(2015,month,31,hour,0,0,"+0"), point).to_s
+      NewTime::NewTime.convert(DateTime.new(2015,month,1,hour,0,0,"+0"), point).to_s
     end
 
     describe ".convert" do
-      context "2015-01-31" do
-        it { expect(c(1, 0)).to eq "2015-01-30 11:47 pm" }
-        it { expect(c(1, 6)).to eq "2015-01-31 4:35 am" }
-        it { expect(c(1, 12)).to eq "2015-01-31 11:37 am" }
-        it { expect(c(1, 18)).to eq "2015-01-31 6:57 pm" }
+      context "2015-01-01" do
+        it { expect(c(1, 0)).to eq "2014-12-31 11:55 pm" }
+        it { expect(c(1, 6)).to eq "2015-01-01 4:23 am" }
+        it { expect(c(1, 12)).to eq "2015-01-01 11:50 am" }
+        it { expect(c(1, 18)).to eq "2015-01-01 7:27 pm" }
       end
 
-      context "2015-07-31" do
-        it { expect(c(7, 0)).to eq "2015-07-30 11:46 pm" }
-        it { expect(c(7, 6)).to eq "2015-07-31 7:14 am" }
-        it { expect(c(7, 12)).to eq "2015-07-31 11:53 am" }
-        it { expect(c(7, 18)).to eq "2015-07-31 4:31 pm" }
+      context "2015-07-01" do
+        it { expect(c(7, 0)).to eq "2015-06-30 11:49 pm" }
+        it { expect(c(7, 6)).to eq "2015-07-01 7:35 am" }
+        it { expect(c(7, 12)).to eq "2015-07-01 11:55 am" }
+        it { expect(c(7, 18)).to eq "2015-07-01 4:15 pm" }
       end
     end
   end
@@ -33,22 +33,22 @@ describe NewTime do
     let(:point) { NewTime::Point.new(-33.714955, 150.311407, "Australia/Sydney") }
 
     def c(month, hour)
-      NewTime::NewTime.convert(DateTime.new(2015,month,31,hour,0,0,"+11"), point).to_s
+      NewTime::NewTime.convert(DateTime.new(2015,month,1,hour,0,0,"+11"), point).to_s
     end
 
     describe ".convert" do
-      context "2015-01-31" do
-        it { expect(c(1, 0)).to eq "2015-01-30 10:35 pm" }
-        it { expect(c(1, 6)).to eq "2015-01-31 5:37 am" }
-        it { expect(c(1, 12)).to eq "2015-01-31 10:57 am" }
-        it { expect(c(1, 18)).to eq "2015-01-31 4:11 pm" }
+      context "2015-01-01" do
+        it { expect(c(1, 0)).to eq "2014-12-31 10:43 pm" }
+        it { expect(c(1, 6)).to eq "2015-01-01 6:07 am" }
+        it { expect(c(1, 12)).to eq "2015-01-01 11:08 am" }
+        it { expect(c(1, 18)).to eq "2015-01-01 4:09 pm" }
       end
 
-      context "2015-07-31" do
-        it { expect(c(7, 0)).to eq "2015-07-30 11:03 pm" }
-        it { expect(c(7, 6)).to eq "2015-07-31 4:21 am" }
-        it { expect(c(7, 12)).to eq "2015-07-31 10:45 am" }
-        it { expect(c(7, 18)).to eq "2015-07-31 5:39 pm" }
+      context "2015-07-01" do
+        it { expect(c(7, 0)).to eq "2015-06-30 11:07 pm" }
+        it { expect(c(7, 6)).to eq "2015-07-01 4:14 am" }
+        it { expect(c(7, 12)).to eq "2015-07-01 10:45 am" }
+        it { expect(c(7, 18)).to eq "2015-07-01 6:00 pm" }
       end
     end
   end
