@@ -17,7 +17,7 @@ module NewTime
     end
 
     def self.current_time(point)
-      convert(DateTime.now, point.latitude, point.longitude, point.tz)
+      convert(DateTime.now, point)
     end
 
     def self.sunrise(date, latitude, longitude, tz)
@@ -28,7 +28,11 @@ module NewTime
       SolarEventCalculator.new(date, latitude, longitude).compute_official_sunset(tz)
     end
 
-    def self.convert(date_time, latitude, longitude, tz)
+    def self.convert(date_time, point)
+      latitude = point.latitude
+      longitude = point.longitude
+      tz = point.tz
+
       sunrise_today = sunrise(date_time.to_date, latitude, longitude, tz)
       sunset_today = sunset(date_time.to_date, latitude, longitude, tz)
 
