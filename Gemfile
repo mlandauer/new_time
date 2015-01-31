@@ -1,3 +1,4 @@
-source "https://rubygems.org"
+source 'https://rubygems.org'
 
-gem 'RubySunrise'
+# Specify your gem's dependencies in new_time.gemspec
+gemspec
