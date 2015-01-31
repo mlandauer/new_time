@@ -59,7 +59,7 @@ module NewTime
           new_start_hour = 18
         end
       end
-      start + (new_seconds.to_f / (60 * 60) - new_start_hour) * (finish - start) / 12
+      (start + (new_seconds.to_f / (60 * 60) - new_start_hour) * (finish - start) / 12).to_time
     end
 
     def self.convert(time, point)

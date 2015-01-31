@@ -15,7 +15,7 @@ describe NewTime do
     def i(month, hour)
       t1 = Time.new(2015,month,1,hour,0,0,"+00:00")
       t2 = NewTime::NewTime.convert(t1, point).convert(point)
-      expect(t2).to eq t1.to_datetime
+      expect(t2).to eq t1
     end
 
     describe ".convert" do
@@ -56,7 +56,7 @@ describe NewTime do
     def i(month, hour)
       t1 = Time.new(2015,month,1,hour,0,0,"+11:00")
       t2 = NewTime::NewTime.convert(t1, point).convert(point)
-      expect(t2).to eq t1.to_datetime
+      expect(t2).to eq t1
     end
 
     describe ".convert" do
@@ -89,7 +89,7 @@ describe NewTime do
     describe "inverting should work with zero fractional" do
       it do
         n1 = NewTime::NewTime.new(2015,2,1,6,50,33,0)
-        t1 = n1.convert(point)
+        t1 = n1.convert(point).to_datetime
         n2 = NewTime::NewTime.convert(t1.to_time, point)
         expect(n2.year).to eq n1.year
         expect(n2.month).to eq n1.month
