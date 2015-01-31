@@ -18,3 +18,7 @@ This is really an experiment to see what a different sense of time means. A seco
 So right now all this little bit of code does is give me the new time.
 
 But for the time being it only works in Katoomba, Australia.
+
+## License
+
+MIT License. Copyright 2015 Matthew Landauer
