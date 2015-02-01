@@ -22,19 +22,11 @@ module NewTime
     end
 
     def self.sunrise(date, point)
-      SolarEventCalculator.new(date, point.latitude, point.longitude).compute_official_sunrise(point.tz)
+      SolarEventCalculator.new(date, point.latitude, point.longitude).compute_official_sunrise(point.tz).to_time
     end
 
     def self.sunset(date, point)
-      SolarEventCalculator.new(date, point.latitude, point.longitude).compute_official_sunset(point.tz)
-    end
-
-    def self.sunrise2(date, point)
-      sunrise(date, point).to_time
-    end
-
-    def self.sunset2(date, point)
-      sunset(date, point).to_time
+      SolarEventCalculator.new(date, point.latitude, point.longitude).compute_official_sunset(point.tz).to_time
     end
 
     # Convert back to "normal" time
@@ -44,18 +36,18 @@ module NewTime
 
       # During daylight hours?
       if hours >= 6 && hours < 18
-        start = NewTime.sunrise2(today, point)
-        finish = NewTime.sunset2(today, point)
+        start = NewTime.sunrise(today, point)
+        finish = NewTime.sunset(today, point)
         new_start_hour = 6
       else
         # Is it before sunrise or after sunset?
         if hours < 6
-          start = NewTime.sunset2(today - 1, point)
-          finish = NewTime.sunrise2(today, point)
+          start = NewTime.sunset(today - 1, point)
+          finish = NewTime.sunrise(today, point)
           new_start_hour = 18 - 24
         else
-          start = NewTime.sunset2(today, point)
-          finish = NewTime.sunrise2(today + 1, point)
+          start = NewTime.sunset(today, point)
+          finish = NewTime.sunrise(today + 1, point)
           new_start_hour = 18
         end
       end
@@ -63,8 +55,8 @@ module NewTime
     end
 
     def self.convert(time, point)
-      sunrise_today = sunrise2(time.to_date, point)
-      sunset_today = sunset2(time.to_date, point)
+      sunrise_today = sunrise(time.to_date, point)
+      sunset_today = sunset(time.to_date, point)
 
       # During daylight hours?
       if time >= sunrise_today && time < sunset_today
@@ -79,8 +71,8 @@ module NewTime
           new_date = time.to_date
         end
         new_start_hour = 18
-        start = sunset(new_date, point).to_time
-        finish = sunrise(new_date + 1, point).to_time
+        start = sunset(new_date, point)
+        finish = sunrise(new_date + 1, point)
       end
 
       new_seconds = (new_start_hour + (time - start).to_f / (finish - start) * 12) * 60 * 60
